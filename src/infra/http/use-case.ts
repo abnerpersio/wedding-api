@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { HttpResponse } from './types';
 
+// TODO: Refactor this to use interfaces
 export abstract class UseCase {
   protected abstract execute(input: Record<string, unknown>): Promise<HttpResponse>;
 
