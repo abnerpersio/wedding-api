@@ -1,12 +1,9 @@
-import { Controller } from '~/infra/http/controller';
-import { UseCase } from '~/infra/http/use-case';
+import { Controller, UseCase } from '~/infra/http/types';
 
-class MyUseCase extends UseCase {
-  constructor() {
-    super();
-  }
+class MyUseCase implements UseCase {
+  constructor() {}
 
-  protected async execute() {
+  async execute() {
     console.log('execute');
     return {
       status: 200,
@@ -15,7 +12,7 @@ class MyUseCase extends UseCase {
   }
 }
 
-export class HealthController extends Controller {
+export class HealthController implements Controller {
   create() {
     return new MyUseCase();
   }

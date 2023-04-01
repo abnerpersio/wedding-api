@@ -5,7 +5,7 @@ import { Route } from './types';
 export const ROUTES: Route[] = [
   {
     path: '/health',
-    method: 'get',
+    method: 'GET',
     useCase: new HealthController().create(),
   },
 ];

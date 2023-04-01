@@ -1,8 +1,10 @@
-import { UseCase } from '../use-case';
+import { UseCase } from '~/infra/http/types';
+
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type Route = {
   path: string;
-  method: 'get' | 'post' | 'put' | 'patch' | 'delete';
+  method: HttpMethod;
   useCase: UseCase;
   middlewares?: [];
   routes?: Route[];
