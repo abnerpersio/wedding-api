@@ -1,9 +1,26 @@
-// TODO:  Implement whatsapp methods using baileys lib
+import { BaileysClientAdapter } from './baileys';
+import { TwilioClientAdapter } from './twilio';
+import { PlatformType, WhatsappClient } from './types';
 
-export class WhatsappClient {
-  connect() {}
+export class WhatsappClientBuilder {
+  constructor() {}
 
-  disconnect() {}
+  build(platform: PlatformType): WhatsappClient {
+    const Adapter = this.getAdapter(platform);
+    if (!Adapter) throw new Error(`Whatsapp platform ${platform} not found.`);
+    return new Adapter().build();
+  }
 
-  send() {}
+  private getAdapter(platform: PlatformType) {
+    switch (platform) {
+      case 'baileys':
+        return BaileysClientAdapter;
+
+      case 'twilio':
+        return TwilioClientAdapter;
+
+      default:
+        break;
+    }
+  }
 }
