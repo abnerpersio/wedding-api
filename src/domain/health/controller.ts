@@ -1,19 +1,8 @@
-import { Controller, UseCase } from '~/infra/http/types';
-
-class MyUseCase implements UseCase {
-  constructor() {}
-
-  async execute() {
-    console.log('execute');
-    return {
-      status: 200,
-      message: 'Test',
-    };
-  }
-}
+import { HealthUseCase } from '~/domain/health/use-case';
+import { Controller } from '~/infra/http/types';
 
 export class HealthController implements Controller {
   create() {
-    return new MyUseCase();
+    return new HealthUseCase();
   }
 }
