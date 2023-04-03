@@ -8,7 +8,7 @@ export class BaileysClientAdapter implements WhatsappClient {
 
   async build() {
     const { state: auth, saveCreds: saveCredentials } = await useMultiFileAuthState(
-      'auth_info_baileys',
+      '.baileys-cache',
     );
 
     this.socket = makeWASocket({ printQRInTerminal: true, auth });
