@@ -7,7 +7,3 @@ export type HttpResponse = {
 export interface UseCase {
   execute(input: Record<string, unknown>): Promise<HttpResponse>;
 }
-
-export interface Controller {
-  create: () => UseCase;
-}

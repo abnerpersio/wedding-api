@@ -3,15 +3,13 @@ import { TwilioClientAdapter } from './twilio';
 import { PlatformType, WhatsappClient } from './types';
 
 export class WhatsappClientBuilder {
-  constructor() {}
-
-  build(platform: PlatformType): WhatsappClient {
+  static async build(platform: PlatformType): Promise<WhatsappClient> {
     const Adapter = this.getAdapter(platform);
     if (!Adapter) throw new Error(`Whatsapp platform ${platform} not found.`);
-    return new Adapter().build();
+    return await new Adapter().build();
   }
 
-  private getAdapter(platform: PlatformType) {
+  private static getAdapter(platform: PlatformType) {
     switch (platform) {
       case 'baileys':
         return BaileysClientAdapter;

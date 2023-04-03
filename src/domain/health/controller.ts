@@ -1,8 +1,7 @@
 import { HealthUseCase } from '~/domain/health/use-case';
-import { Controller } from '~/infra/http/types';
 
-export class HealthController implements Controller {
-  create() {
+export class HealthController {
+  static create() {
     return new HealthUseCase();
   }
 }
