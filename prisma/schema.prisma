@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum GuestType {
+  common
+  honor
+}
+
+enum InviteStatus {
+  waiting
+  confirmed
+  refused
+}
+
+enum NotificationStatus {
+  failed
+  delivered
+  pending
+}
+
+enum MessageChannel {
+  whatsapp
+  email
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  name     String
+  password String
+
+  @@map("user")
+}
+
+model Guest {
+  id    Int       @id @default(autoincrement())
+  name  String
+  type  GuestType @default(common)
+  phone String?
+  email String?
+
+  notifications Notification[]
+  invites       Invite[]
+
+  @@map("guest")
+}
+
+model Invite {
+  id         Int          @id @default(autoincrement())
+  status     InviteStatus @default(waiting)
+  companions Int          @default(0)
+  commments  String?
+
+  guestId Int
+  guest   Guest @relation(fields: [guestId], references: [id])
+
+  @@map("invite")
+}
+
+model Notification {
+  id           Int                @id @default(autoincrement())
+  recipient    String
+  message      String
+  channel      MessageChannel
+  status       NotificationStatus @default(pending)
+  type         String
+  failedReason String?
+
+  guestId Int
+  guest   Guest @relation(fields: [guestId], references: [id])
+
+  @@map("notification")
+}
