@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { logger } from '~/infra/config/logger';
 import { Credentials, UseCase } from '~/infra/http/types';
 
 import { RequestError } from '../errors/request-error';
@@ -7,8 +8,9 @@ export class ExpressAdapter {
   constructor(private readonly useCase: UseCase) {}
 
   adapt = async (req: Request, res: Response) => {
+    const input = { ...(req.body || {}), ...(req.query || {}), ...(req.params || {}) };
+
     try {
-      const input = { ...(req.body || {}), ...(req.query || {}), ...(req.params || {}) };
       const credentials = {} as Credentials;
       const { status, message, data } = await this.useCase.execute(input, credentials);
 
@@ -18,7 +20,17 @@ export class ExpressAdapter {
       }
 
       res.sendStatus(status);
-    } catch (error: unknown) {
+    } catch (error: any) {
+      logger.info(
+        {
+          path: req.path,
+          method: req.method,
+          input,
+          error: error.message || '',
+        },
+        'Error at request',
+      );
+
       if (error instanceof RequestError) {
         res.status(error.statusCode).json({
           message: error.message || 'Internal Error',
