@@ -15,7 +15,10 @@ export class GuestRepository {
   }
 
   async findOne(id: number): Promise<Guest | null> {
-    const guest = await this.prisma.guest.findFirst({ where: { id } });
+    const guest = await this.prisma.guest.findFirst({
+      where: { id },
+      include: { invites: true },
+    });
     if (!guest) return null;
     return new Guest(guest);
   }
