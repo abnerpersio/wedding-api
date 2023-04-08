@@ -1,11 +1,11 @@
 import { prisma } from '~/infra/config/database';
 
 import { GuestRepository } from '../repositories/guest-repository';
-import { CreateGuestUseCase } from '../use-cases/create-guest';
+import { DeleteGuestUseCase } from '../use-cases/delete-guest';
 
-export class CreateGuestController {
+export class DeleteGuestController {
   static create() {
     const repository = new GuestRepository(prisma);
-    return new CreateGuestUseCase(repository);
+    return new DeleteGuestUseCase(repository);
   }
 }
