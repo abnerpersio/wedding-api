@@ -1,9 +1,11 @@
-export type HttpResponse = {
+export type Credentials = {};
+
+export type HttpResponse<R = unknown> = {
   status: number;
   message?: string;
-  data?: Record<string, unknown>;
+  data?: R;
 };
 
-export interface UseCase {
-  execute(input: Record<string, unknown>): Promise<HttpResponse>;
+export interface UseCase<I = Record<string, unknown>, R = unknown> {
+  execute(input: I, credentials: Credentials): Promise<HttpResponse<R>>;
 }

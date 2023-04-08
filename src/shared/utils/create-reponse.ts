@@ -6,7 +6,7 @@ export class CreateResponse {
     return { status: 200, [field]: payload };
   }
 
-  static created(data?: Record<string, unknown>): HttpResponse {
+  static created(data?: unknown): HttpResponse {
     return { status: 201, data };
   }
 

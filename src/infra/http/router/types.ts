@@ -7,5 +7,4 @@ export type Route = {
   method: HttpMethod;
   useCase: UseCase;
   middlewares?: [];
-  routes?: Route[];
 };
