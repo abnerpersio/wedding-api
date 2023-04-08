@@ -1,4 +1,4 @@
-import '~/infra/env/setup';
+import '~/infra/config/env/setup';
 import { Server } from '~/infra/http/server';
 
 const server = new Server();

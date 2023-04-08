@@ -1,5 +1,5 @@
 import express, { Application, json } from 'express';
-import { Env } from '~/infra/env';
+import { Env } from '~/infra/config/env';
 import { HttpRouter } from '~/infra/http/router';
 
 export class Server {
