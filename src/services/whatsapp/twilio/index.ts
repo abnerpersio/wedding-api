@@ -1,10 +1,10 @@
-// TODO: implement this class
 import { WhatsappClient } from '~/services/whatsapp/types';
 
+// TODO: implement this class
 export class TwilioClientAdapter implements WhatsappClient {
-  build() {
+  async build() {
     return this;
   }
 
-  async sendMessage(message: string) {}
+  async sendMessage(message: string, phone: string) {}
 }

@@ -1,4 +1,4 @@
-import { Invite } from '~/domain/invites/entities/invite';
+import { Invite } from '~/domain/invite/entities/invite';
 
 import { GuestType, Guest as PrismaGuestPrev, Invite as PrismaInvite } from '@prisma/client';
 

@@ -1,10 +1,9 @@
+import { GuestRepository } from '~/domain/guest/repositories/guest-repository';
 import { RequestError } from '~/infra/errors/request-error';
 import { UseCase } from '~/infra/http/types';
 import { CreateResponse } from '~/shared/utils/create-reponse';
 
 import { GuestType } from '@prisma/client';
-
-import { GuestRepository } from '../repositories/guest-repository';
 
 type Input = {
   id: string;

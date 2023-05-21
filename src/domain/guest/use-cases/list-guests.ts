@@ -1,13 +1,15 @@
+import { GuestRepository } from '~/domain/guest/repositories/guest-repository';
+import { GuestFilters } from '~/domain/guest/repositories/types';
 import { UseCase } from '~/infra/http/types';
 import { CreateResponse } from '~/shared/utils/create-reponse';
 
-import { GuestRepository } from '../repositories/guest-repository';
+type Input = GuestFilters;
 
-export class ListGuestUseCase implements UseCase {
+export class ListGuestsUseCase implements UseCase {
   constructor(private readonly repository: GuestRepository) {}
 
-  async execute() {
-    const guests = await this.repository.findAll();
+  async execute(input: Input) {
+    const guests = await this.repository.findAll(input);
     return CreateResponse.ok(guests);
   }
 }

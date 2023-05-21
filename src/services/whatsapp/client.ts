@@ -1,24 +1,19 @@
-import { BaileysClientAdapter } from './baileys';
-import { TwilioClientAdapter } from './twilio';
+import { BaileysClientAdapter } from '~/services/whatsapp/baileys';
+import { TwilioClientAdapter } from '~/services/whatsapp/twilio';
+import { VenomClientAdapter } from '~/services/whatsapp/venom';
+
 import { PlatformType, WhatsappClient } from './types';
 
+const ADAPTERS = {
+  baileys: BaileysClientAdapter,
+  twilio: TwilioClientAdapter,
+  venom: VenomClientAdapter,
+};
+
 export class WhatsappClientBuilder {
-  static async build(platform: PlatformType): Promise<WhatsappClient> {
-    const Adapter = this.getAdapter(platform);
+  static build(platform: PlatformType): Promise<WhatsappClient> {
+    const Adapter = ADAPTERS[platform];
     if (!Adapter) throw new Error(`Whatsapp platform ${platform} not found.`);
-    return await new Adapter().build();
-  }
-
-  private static getAdapter(platform: PlatformType) {
-    switch (platform) {
-      case 'baileys':
-        return BaileysClientAdapter;
-
-      case 'twilio':
-        return TwilioClientAdapter;
-
-      default:
-        break;
-    }
+    return new Adapter().build();
   }
 }

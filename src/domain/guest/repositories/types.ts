@@ -1,7 +1,7 @@
 import { GuestType } from '@prisma/client';
 
 export type GuestFilters = {
-  type: GuestType;
+  type?: GuestType;
 };
 
 export type CreateGuestInput = {

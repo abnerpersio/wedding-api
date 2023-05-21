@@ -6,17 +6,17 @@ import { GuestType } from '@prisma/client';
 
 import { GuestRepository } from '../repositories/guest-repository';
 
-type Payload = {
+type Input = {
   name: string;
   email?: string | null;
   phone?: string | null;
   type?: GuestType;
 };
 
-export class CreateGuestUseCase implements UseCase<Payload> {
+export class CreateGuestUseCase implements UseCase<Input> {
   constructor(private readonly repository: GuestRepository) {}
 
-  async execute(input: Payload): Promise<HttpResponse> {
+  async execute(input: Input): Promise<HttpResponse> {
     if (!input.name) {
       throw new RequestError(400, 'Invalid input.');
     }

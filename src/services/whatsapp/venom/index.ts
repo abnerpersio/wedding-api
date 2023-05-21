@@ -1,6 +1,6 @@
 import { WhatsappClient } from '~/services/whatsapp/types';
 
-export class BaileysClientAdapter implements WhatsappClient {
+export class VenomClientAdapter implements WhatsappClient {
   async build() {
     return this;
   }
