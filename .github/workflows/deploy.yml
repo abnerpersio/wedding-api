@@ -1,13 +1,7 @@
 name: Fly Deploy
 
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        default: "main"
-        type: choice
-        options:
-          - main
+  - workflow_dispatch
 
 jobs:
   deploy:
