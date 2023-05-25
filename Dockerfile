@@ -15,7 +15,7 @@ COPY . .
 RUN yarn db:generate
 RUN yarn build
 
-ENV PORT 80
-EXPOSE 80
+ENV PORT 8080
+EXPOSE 8080
 
 CMD [ "node", "dist/index.js" ]
