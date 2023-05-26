@@ -1,4 +1,8 @@
-export type Credentials = {};
+export type Credentials = {
+  id: number;
+  email: string;
+  name: string;
+};
 
 export type HttpResponse<R = unknown> = {
   status: number;

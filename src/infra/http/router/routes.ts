@@ -9,14 +9,29 @@ import { DeleteInviteController } from '~/domain/invite/controllers/delete-invit
 import { GetInviteController } from '~/domain/invite/controllers/get-invite';
 import { ListInvitesController } from '~/domain/invite/controllers/list-invites';
 import { UpdateInviteController } from '~/domain/invite/controllers/update-invite';
+import { GetMeController } from '~/domain/user/controllers/get-me';
+import { LoginController } from '~/domain/user/controllers/login';
 import { SendMessageController } from '~/domain/whatsapp/controllers/send-message';
 
+import { AuthMiddleware } from '../middlewares/auth';
 import { Route } from './types';
 
 export const ROUTES: Route[] = [
-  { path: '/health', method: 'GET', useCase: HealthController.create() },
+  { path: ['/', '/health'], method: 'GET', useCase: HealthController.create() },
   { path: '/message', method: 'GET', useCase: SendMessageController.create() },
-  { path: '/guest', method: 'GET', useCase: ListGuestsController.create() },
+  { path: '/login', method: 'POST', useCase: LoginController.create() },
+  {
+    path: '/user/me',
+    method: 'GET',
+    useCase: GetMeController.create(),
+    middlewares: [AuthMiddleware.create()],
+  },
+  {
+    path: '/guest',
+    method: 'GET',
+    useCase: ListGuestsController.create(),
+    middlewares: [AuthMiddleware.create()],
+  },
   { path: '/guest/:id', method: 'GET', useCase: GetGuestController.create() },
   { path: '/guest', method: 'POST', useCase: CreateGuestController.create() },
   { path: '/guest/:id', method: 'PUT', useCase: UpdateGuestController.create() },

@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { logger } from '~/infra/config/logger';
+import { RequestError } from '~/infra/errors/request-error';
 import { Credentials, UseCase } from '~/infra/http/types';
-
-import { RequestError } from '../errors/request-error';
 
 export class ExpressAdapter {
   constructor(private readonly useCase: UseCase) {}
@@ -11,7 +10,7 @@ export class ExpressAdapter {
     const input = { ...(req.body || {}), ...(req.query || {}), ...(req.params || {}) };
 
     try {
-      const credentials = {} as Credentials;
+      const credentials = req.credentials as Credentials;
       const { status, message, data } = await this.useCase.execute(input, credentials);
 
       if (message || data) {

@@ -14,7 +14,15 @@ export class CreateResponse {
     return { status: 204 };
   }
 
-  static notFound(): HttpResponse {
-    return { status: 404, message: 'Not found' };
+  static notFound(message?: string): HttpResponse {
+    return { status: 404, message: message || 'Not found' };
+  }
+
+  static forbidden(): HttpResponse {
+    return { status: 403 };
+  }
+
+  static unauthorized(message?: string): HttpResponse {
+    return { status: 401, message };
   }
 }

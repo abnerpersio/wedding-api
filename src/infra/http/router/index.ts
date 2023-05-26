@@ -8,11 +8,14 @@ export class HttpRouter {
   constructor(private readonly server: Application) {}
 
   setup() {
-    // TODO: handle custom middlewares here
     for (const route of ROUTES) {
       const method = route.method.toLowerCase() as ExpressHttpMethod;
       if (!this.server[method]) return;
-      this.server[method](route.path, new ExpressAdapter(route.useCase).adapt);
+      const handlers = [
+        ...(route.middlewares || []).map((middleware) => middleware.adapt),
+        new ExpressAdapter(route.useCase).adapt,
+      ];
+      this.server[method](route.path, handlers);
     }
   }
 }
