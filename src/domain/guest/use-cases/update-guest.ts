@@ -15,8 +15,7 @@ export class UpdateGuestUseCase implements UseCase<Input> {
   constructor(private readonly repository: GuestRepository) {}
 
   async execute(input: Input) {
-    const { id: guestId, ...data } = input;
-    const id = parseInt(guestId);
+    const { id, ...data } = input;
 
     const exists = await this.repository.findOne(id);
     if (!exists) {

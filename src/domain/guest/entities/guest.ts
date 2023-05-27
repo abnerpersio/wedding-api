@@ -7,7 +7,7 @@ type PrismaGuest = PrismaGuestPrev & {
 };
 
 export class Guest {
-  id: number;
+  id: string;
   name: string;
   type: GuestType;
   phone: string | null;

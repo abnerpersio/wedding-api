@@ -12,7 +12,7 @@ export class DeleteGuestUseCase implements UseCase<Input> {
   constructor(private readonly repository: GuestRepository) {}
 
   async execute(input: Input): Promise<HttpResponse<unknown>> {
-    const id = parseInt(input.id);
+    const { id } = input;
 
     const exists = await this.repository.findOne(id);
     if (!exists) {

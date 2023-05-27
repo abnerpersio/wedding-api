@@ -12,14 +12,14 @@ type PrismaNotification = PrismaNotificationPrev & {
 };
 
 export class Notification {
-  id: number;
+  id: string;
   recipient: string;
   message: string;
   channel: MessageChannel;
   status: NotificationStatus;
   type: string;
   failedReason: string | null;
-  guestId: number;
+  guestId: string;
 
   guest?: Guest;
 

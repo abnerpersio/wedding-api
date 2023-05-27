@@ -1,12 +1,12 @@
 import { MessageChannel, NotificationStatus } from '@prisma/client';
 
 export type NotificationFilters = {
-  guestId?: number;
+  guestId?: string;
   status?: NotificationStatus;
 };
 
 export type CreateNotificationInput = {
-  guestId: number;
+  guestId: string;
   recipient: string;
   message: string;
   channel: MessageChannel;

@@ -9,7 +9,7 @@ export class UserRepository {
     return this.prisma.user.create({ data });
   }
 
-  async findOne(id: number): Promise<User | null> {
+  async findOne(id: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { id } });
     if (!user) return null;
     return new User(user);

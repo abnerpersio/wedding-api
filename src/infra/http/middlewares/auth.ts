@@ -28,7 +28,7 @@ export class AuthMiddleware extends BaseMiddleware {
     if (!token) return CreateResponse.unauthorized();
 
     try {
-      const credentials = JWT.decode<{ id: number }>(token);
+      const credentials = JWT.decode<{ id: string }>(token);
       if (!credentials) return CreateResponse.unauthorized();
 
       const { id } = credentials;

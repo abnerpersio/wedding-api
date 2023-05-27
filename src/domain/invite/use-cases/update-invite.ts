@@ -11,8 +11,7 @@ export class UpdateInviteUseCase implements UseCase<Input> {
   constructor(private readonly repository: InviteRepository) {}
 
   async execute(input: Input) {
-    const { id: inviteId, ...data } = input;
-    const id = parseInt(inviteId);
+    const { id, ...data } = input;
 
     const exists = await this.repository.findOne(id);
     if (!exists) {

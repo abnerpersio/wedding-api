@@ -11,7 +11,7 @@ export class GetInviteUseCase implements UseCase<Input> {
   constructor(private readonly repository: InviteRepository) {}
 
   async execute(input: Input) {
-    const id = input.id ? parseInt(input.id) : null;
+    const { id } = input;
 
     if (!id) {
       throw new RequestError(400, 'Invalid input');

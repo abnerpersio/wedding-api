@@ -1,12 +1,12 @@
 import { InviteStatus } from '@prisma/client';
 
 export type InviteFilters = {
-  guestId?: number;
+  guestId?: string;
   status?: InviteStatus;
 };
 
 export type CreateInviteInput = {
-  guestId: number;
+  guestId: string;
   companions?: number;
   comments?: string;
   status?: InviteStatus;

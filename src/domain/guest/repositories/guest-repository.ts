@@ -14,7 +14,7 @@ export class GuestRepository {
     return guests.map((guest) => new Guest(guest));
   }
 
-  async findOne(id: number): Promise<Guest | null> {
+  async findOne(id: string): Promise<Guest | null> {
     const guest = await this.prisma.guest.findFirst({
       where: { id },
       include: { invites: true },
@@ -35,7 +35,7 @@ export class GuestRepository {
     return new Guest(created);
   }
 
-  async update(id: number, input: UpdateGuestInput): Promise<Guest> {
+  async update(id: string, input: UpdateGuestInput): Promise<Guest> {
     const updated = await this.prisma.guest.update({
       where: { id },
       data: {
@@ -48,7 +48,7 @@ export class GuestRepository {
     return new Guest(updated);
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this.prisma.guest.delete({ where: { id } });
   }
 }

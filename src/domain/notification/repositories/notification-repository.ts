@@ -33,7 +33,7 @@ export class NotificationRepository {
     return new Notification(created);
   }
 
-  async update(id: number, input: UpdateNotificationInput): Promise<Notification> {
+  async update(id: string, input: UpdateNotificationInput): Promise<Notification> {
     const updated = await this.prisma.notification.update({
       where: { id },
       data: {

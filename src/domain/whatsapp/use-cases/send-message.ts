@@ -21,8 +21,7 @@ export class SendMessageUseCase implements UseCase {
   ) {}
 
   async execute(input: Input): Promise<HttpResponse> {
-    const { message } = input;
-    const guestId = parseInt(input.guestId);
+    const { message, guestId } = input;
 
     const adapter = await WhatsappClientBuilder.build(Env.WHATSAPP_PROVIDER as PlatformType);
 

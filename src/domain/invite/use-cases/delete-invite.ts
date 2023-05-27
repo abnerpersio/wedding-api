@@ -11,7 +11,7 @@ export class DeleteInviteUseCase implements UseCase<Input> {
   constructor(private readonly repository: InviteRepository) {}
 
   async execute(input: Input): Promise<HttpResponse> {
-    const id = parseInt(input.id);
+    const { id } = input;
 
     const exists = await this.repository.findOne(id);
     if (!exists) {

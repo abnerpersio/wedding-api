@@ -7,11 +7,11 @@ type PrismaInvite = PrismaInvitePrev & {
 };
 
 export class Invite {
-  id: number;
+  id: string;
   status: InviteStatus;
   companions: number;
   commments: string | null;
-  guestId: number;
+  guestId: string;
 
   guest?: Guest;
 

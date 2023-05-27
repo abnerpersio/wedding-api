@@ -1,7 +1,7 @@
 import { User as PrismaUser } from '@prisma/client';
 
 export class User {
-  id: number;
+  id: string;
   email: string;
   name: string;
   password: string;

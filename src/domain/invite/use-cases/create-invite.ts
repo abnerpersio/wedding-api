@@ -6,7 +6,7 @@ import { CreateResponse } from '~/shared/utils/create-reponse';
 import { InviteStatus } from '@prisma/client';
 
 type Input = {
-  guestId: number;
+  guestId: string;
   companions?: number;
   comments?: string;
   status?: string;
