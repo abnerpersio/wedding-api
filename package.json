@@ -12,6 +12,7 @@
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "node scripts/build.js",
+    "ts:check": "tsc --noEmit",
     "db:generate": "prisma generate",
     "db:migrate:make": "prisma migrate dev --name",
     "db:migrate:deploy": "prisma migrate deploy"
