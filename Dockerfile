@@ -2,8 +2,6 @@ FROM node:lts-alpine AS builder
 
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-RUN npm config set cache /home/node/app/.npm-cache --global
-
 WORKDIR /home/node/app
 
 COPY package*.json ./
@@ -20,7 +18,11 @@ COPY . .
 RUN yarn db:generate
 RUN yarn build
 
-COPY --chown=node:node . .
+FROM node:lts-alpine AS final
+
+WORKDIR /home/node/app
+
+COPY --from=builder /home/node/app/dist/ dist/
 
 ENV PORT 8080
 EXPOSE 8080
