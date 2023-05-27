@@ -34,7 +34,7 @@ enum MessageChannel {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id       String @unique @default(uuid())
   email    String @unique
   name     String
   password String
@@ -43,7 +43,7 @@ model User {
 }
 
 model Guest {
-  id    Int       @id @default(autoincrement())
+  id    String    @unique @default(uuid())
   name  String
   type  GuestType @default(common)
   phone String?
@@ -56,19 +56,19 @@ model Guest {
 }
 
 model Invite {
-  id         Int          @id @default(autoincrement())
+  id         String       @unique @default(uuid())
   status     InviteStatus @default(waiting)
   companions Int          @default(0)
   commments  String?
 
-  guestId Int
-  guest   Guest @relation(fields: [guestId], references: [id])
+  guestId String
+  guest   Guest  @relation(fields: [guestId], references: [id])
 
   @@map("invite")
 }
 
 model Notification {
-  id           Int                @id @default(autoincrement())
+  id           String             @unique @default(uuid())
   recipient    String
   message      String
   channel      MessageChannel
@@ -76,8 +76,8 @@ model Notification {
   type         String
   failedReason String?
 
-  guestId Int
-  guest   Guest @relation(fields: [guestId], references: [id])
+  guestId String
+  guest   Guest  @relation(fields: [guestId], references: [id])
 
   @@map("notification")
 }
