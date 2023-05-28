@@ -14,6 +14,7 @@ RUN yarn
 COPY . .
 
 RUN yarn db:generate
+RUN yarn db:migrate:deploy
 RUN yarn ts:check
 RUN yarn build
 
