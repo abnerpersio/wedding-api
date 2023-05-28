@@ -13,8 +13,8 @@ RUN yarn
 
 COPY . .
 
-RUN yarn ts:check
 RUN yarn db:generate
+RUN yarn ts:check
 RUN yarn build
 
 FROM node:lts-alpine AS final
