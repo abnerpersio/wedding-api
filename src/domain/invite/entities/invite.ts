@@ -10,7 +10,7 @@ export class Invite {
   id: string;
   status: InviteStatus;
   companions: number;
-  commments: string | null;
+  comments: string | null;
   guestId: string;
 
   guest?: Guest;
@@ -19,7 +19,7 @@ export class Invite {
     this.id = payload.id;
     this.status = payload.status;
     this.companions = payload.companions;
-    this.commments = payload.commments;
+    this.comments = payload.comments;
     this.guestId = payload.guestId;
 
     if (payload.guest) {

@@ -28,7 +28,7 @@ export class InviteRepository {
       data: {
         status: input.status,
         companions: input.companions,
-        commments: input.comments,
+        comments: input.comments,
         guest: {
           connect: {
             id: input.guestId,
@@ -43,7 +43,7 @@ export class InviteRepository {
     const updated = await this.prisma.invite.update({
       where: { id },
       data: {
-        commments: input.comments,
+        comments: input.comments,
         companions: input.companions,
         status: input.status,
       },
