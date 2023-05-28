@@ -1,14 +1,10 @@
+import { Request } from 'express';
 import { prisma } from '~/infra/config/database';
 import { BaseMiddleware, MiddlewareResponse } from '~/infra/http/middlewares/base';
-import { Credentials } from '~/infra/http/types';
 import { CreateResponse } from '~/shared/utils/create-reponse';
 import { JWT } from '~/shared/utils/jwt';
 
 import { PrismaClient } from '@prisma/client';
-
-type Headers = {
-  authorization?: string;
-};
 
 export class AuthMiddleware extends BaseMiddleware {
   constructor(private readonly prisma: PrismaClient) {
@@ -19,12 +15,8 @@ export class AuthMiddleware extends BaseMiddleware {
     return new AuthMiddleware(prisma);
   }
 
-  protected async execute(
-    _: unknown,
-    headers: Headers,
-    updateCredentials: (payload: Credentials) => void,
-  ): Promise<MiddlewareResponse> {
-    const token = headers.authorization?.split(' ')?.[1];
+  protected async execute(req: Request): Promise<MiddlewareResponse> {
+    const token = req.headers.authorization?.split(' ')?.[1];
     if (!token) return CreateResponse.unauthorized();
 
     try {
@@ -32,11 +24,14 @@ export class AuthMiddleware extends BaseMiddleware {
       if (!credentials) return CreateResponse.unauthorized();
 
       const { id } = credentials;
-
       const user = await this.prisma.user.findUnique({ where: { id } });
       if (!user) return CreateResponse.unauthorized();
 
-      updateCredentials({ id, email: user.email, name: user.name });
+      req.credentials = {
+        id,
+        email: user.email,
+        name: user.name,
+      };
 
       return true;
     } catch {

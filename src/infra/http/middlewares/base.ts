@@ -1,25 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
 import { logger } from '~/infra/config/logger';
 import { RequestError } from '~/infra/errors/request-error';
-import { Credentials, HttpResponse } from '~/infra/http/types';
+import { HttpResponse } from '~/infra/http/types';
 
 export type MiddlewareResponse<R = unknown> = HttpResponse<R> | true;
 
 export abstract class BaseMiddleware {
   protected abstract execute(
-    input: unknown,
-    headers: Record<string, unknown>,
-    updateCredentials: (payload: Credentials) => void,
+    req: Request,
+    res: Response,
   ): Promise<MiddlewareResponse> | MiddlewareResponse;
 
   adapt = async (req: Request, res: Response, next: NextFunction) => {
-    const input = { ...(req.body || {}), ...(req.query || {}), ...(req.params || {}) };
-    const headers = { ...(req.headers || {}) };
-
     try {
-      const response = await this.execute(input, headers, (payload) => {
-        req.credentials = payload;
-      });
+      const response = await this.execute(req, res);
 
       if (typeof response === 'boolean' && response === true) {
         next();
