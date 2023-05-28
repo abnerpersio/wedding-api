@@ -12,7 +12,7 @@ CREATE TYPE "MessageChannel" AS ENUM ('whatsapp', 'email');
 
 -- CreateTable
 CREATE TABLE "user" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE "user" (
 
 -- CreateTable
 CREATE TABLE "guest" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" "GuestType" NOT NULL DEFAULT 'common',
     "phone" TEXT,
@@ -33,25 +33,25 @@ CREATE TABLE "guest" (
 
 -- CreateTable
 CREATE TABLE "invite" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "status" "InviteStatus" NOT NULL DEFAULT 'waiting',
     "companions" INTEGER NOT NULL DEFAULT 0,
     "commments" TEXT,
-    "guestId" INTEGER NOT NULL,
+    "guestId" TEXT NOT NULL,
 
     CONSTRAINT "invite_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "notification" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "recipient" TEXT NOT NULL,
     "message" TEXT NOT NULL,
     "channel" "MessageChannel" NOT NULL,
     "status" "NotificationStatus" NOT NULL DEFAULT 'pending',
     "type" TEXT NOT NULL,
     "failedReason" TEXT,
-    "guestId" INTEGER NOT NULL,
+    "guestId" TEXT NOT NULL,
 
     CONSTRAINT "notification_pkey" PRIMARY KEY ("id")
 );
