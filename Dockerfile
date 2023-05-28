@@ -14,7 +14,6 @@ RUN yarn
 COPY . .
 
 RUN yarn db:generate
-RUN yarn db:migrate:deploy
 RUN yarn ts:check
 RUN yarn build
 
@@ -23,6 +22,8 @@ FROM node:lts-alpine AS final
 WORKDIR /home/node/app
 
 COPY --from=builder /home/node/app/dist/ dist/
+COPY --from=builder /home/node/app/prisma/ prisma/
+COPY --from=builder /home/node/app/package.json /
 
 ENV PORT 8080
 EXPOSE 8080
