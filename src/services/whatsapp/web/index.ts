@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { WhatsappClient } from '~/services/whatsapp/types';
 
 export class WebAdapter implements WhatsappClient {
