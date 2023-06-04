@@ -107,3 +107,8 @@ dist
 
 /tmp/*
 !/tmp/.gitkeep
+
+/scripts/assets/*
+
+# Venom lib
+tokens
