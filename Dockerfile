@@ -17,12 +17,12 @@ RUN yarn db:generate
 RUN yarn ts:check
 RUN yarn build
 
-FROM node:lts-alpine AS final
+# FROM node:lts-alpine AS final
 
-WORKDIR /home/node/app
+# WORKDIR /home/node/app
 
-COPY --from=builder /home/node/app/dist/ dist/
-COPY --from=builder /home/node/app/prisma/ dist/
+# COPY --from=builder /home/node/app/dist/ dist/
+# COPY --from=builder /home/node/app/prisma/ dist/
 
 ENV PORT 8080
 EXPOSE 8080
