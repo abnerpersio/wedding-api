@@ -1,4 +1,4 @@
-import { Hash } from '../src/shared/utils/hash';
+import { Hash } from '~/shared/utils/hash';
 
 const HASH_INPUT = process.env.HASH_INPUT || '';
 
