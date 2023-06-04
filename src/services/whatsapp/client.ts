@@ -1,13 +1,13 @@
 import { BaileysClientAdapter } from '~/services/whatsapp/baileys';
 import { TwilioClientAdapter } from '~/services/whatsapp/twilio';
-import { VenomClientAdapter } from '~/services/whatsapp/venom';
+import { WebAdapter } from '~/services/whatsapp/web';
 
 import { PlatformType, WhatsappClient } from './types';
 
 const ADAPTERS = {
   baileys: BaileysClientAdapter,
   twilio: TwilioClientAdapter,
-  venom: VenomClientAdapter,
+  web: WebAdapter,
 };
 
 export class WhatsappClientBuilder {

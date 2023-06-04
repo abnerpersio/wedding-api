@@ -110,5 +110,6 @@ dist
 
 /scripts/assets/*
 
-# Venom lib
+# Whatsapp lib
 tokens
+.wwebjs_cache

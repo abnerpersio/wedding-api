@@ -55,7 +55,7 @@ Com carinho, Abner e Mayara 💍❤️`;
   });
 
   console.info('Configuring WhatsApp adapter');
-  const adapter = await WhatsappClientBuilder.build('venom');
+  const adapter = await WhatsappClientBuilder.build('web');
   console.info('Finished WhatsApp adapter');
 
   for await (const invite of invites) {

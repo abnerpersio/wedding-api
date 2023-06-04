@@ -1,4 +1,4 @@
-export type PlatformType = 'twilio' | 'baileys' | 'venom';
+export type PlatformType = 'twilio' | 'baileys' | 'web';
 
 export interface WhatsappClient {
   build: () => Promise<this> | this;
