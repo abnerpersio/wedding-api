@@ -5,7 +5,5 @@ export class BaileysClientAdapter implements WhatsappClient {
     return this;
   }
 
-  async sendMessage(message: string, phone: string) {
-    throw new Error('Provider not implemented.');
-  }
+  async sendMessage(message: string, phone: string) {}
 }

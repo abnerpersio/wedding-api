@@ -55,7 +55,7 @@ Com carinho, Abner e Mayara 💍❤️`;
   });
 
   console.info('Configuring WhatsApp adapter');
-  const adapter = await WhatsappClientBuilder.build('web');
+  const adapter = await WhatsappClientBuilder.build('baileys');
   console.info('Finished WhatsApp adapter');
 
   for await (const invite of invites) {
@@ -71,11 +71,11 @@ Com carinho, Abner e Mayara 💍❤️`;
 
     try {
       console.info(`Starting send notification for guest ${guest.name} and invite ${invite.id}`);
-      const alreadyNotificated = await getNotifications(guest.id, NOTIFICATION_TYPE);
-      if (!!alreadyNotificated) {
-        console.info(`Already notificated guest ${guest.name} for this type of notification`);
-        continue;
-      }
+      // const alreadyNotificated = await getNotifications(guest.id, NOTIFICATION_TYPE);
+      // if (!!alreadyNotificated) {
+      //   console.info(`Already notificated guest ${guest.name} for this type of notification`);
+      //   continue;
+      // }
 
       const phone = Formatters.phone(guest.phone || '');
       if (!phone) {
@@ -89,11 +89,11 @@ Com carinho, Abner e Mayara 💍❤️`;
 
       await adapter.sendMessage(message, phone);
 
-      await saveNotification({
-        message,
-        guestId: guest.id,
-        recipient: phone,
-      });
+      // await saveNotification({
+      //   message,
+      //   guestId: guest.id,
+      //   recipient: phone,
+      // });
 
       console.info(`Saved notification for guest ${guest.name}`);
 
