@@ -21,10 +21,9 @@ export class ReportGenerator {
     return pathToFile;
   }
 
-  getPath(format: 'csv' | 'xlsx', filename: string) {
+  private getPath(format: 'csv' | 'xlsx', filename: string) {
     return path.resolve(
       __dirname,
-      '..',
       '..',
       '..',
       '..',
